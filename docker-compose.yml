@@ -3,7 +3,7 @@ version: '2'
 services:
     chat:
         build: .
-        entrypoint: http-server /hack.chat/client
+        entrypoint: http-server /src/client
         labels:
           - "traefik.enabled=true"
           - "traefik.backend=chat"
@@ -16,7 +16,7 @@ services:
         restart: always
     chat-server:
         build: .
-        entrypoint: node /hack.chat/server.js
+        entrypoint: node /src/server.js
         labels:
           - "traefik.enabled=true"
           - "traefik.backend=chatws"
