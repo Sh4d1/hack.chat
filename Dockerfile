@@ -1,15 +1,14 @@
-FROM alpine:latest
+FROM mhart/alpine-node
 
-
-RUN apk update && apk add git make nodejs nodejs-npm 
-COPY hack.chat /hack.chat
-RUN cd hack.chat && \
-    npm install && \
-    cd client && \
+COPY src /src
+RUN apk update && \
+    apk add make && \
     npm install -g less jade http-server && \
-    make && \
-    apk del git make nodejs-npm && \
-    rm -rf /var/cache/apk/* 
+    cd src && \
+    npm install && \
+    make -C client && \
+    apk del make && \
+    rm -rf /var/cache/apk/*
 
-WORKDIR /hack.chat/
+WORKDIR /src/
 EXPOSE 8080 6060

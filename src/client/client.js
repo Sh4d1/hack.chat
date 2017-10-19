@@ -58,8 +58,8 @@ window.setInterval(function() {
 
 
 function join(channel) {
-    var host = process.env.CHATWS
-    ws = new WebSocket('wss://' + host + ':443')
+	var host = window.location.host.replace('chat', 'chatws')
+	ws = new WebSocket('wss://' + host + ':443')
 
 	var wasConnected = false
 
